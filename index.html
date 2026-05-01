@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>NEXUS | Designed to Connect - Premium Conference Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
-  <!-- GSAP Core & ScrollTrigger -->
+  <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   
@@ -17,44 +17,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
   
   <style>
-    :root {
-      color-scheme: dark;
-      --navy:       #0d2d5e;
-      --navy-deep:  #071c3a;
-      --navy-mid:   #1a4a8a;
-      --navy-light: #2a6abf;
-      --green:      #28b870;
-      --green-deep: #1a7a4a;
-      --green-glow: #3de098;
-      --bg:         #04101f;
-      --surface:    #081628;
-      --surface2:   #0d1f38;
-      --text:       #eef3ff;
-      --muted:      #8ca8cc;
-      --border:     rgba(40,184,112,0.15);
-      --border-navy:rgba(30,100,200,0.2);
-      --shadow:     0 28px 80px rgba(0,0,0,.45);
-      --glass-bg:   rgba(13, 29, 56, 0.45);
-      --glass-border: rgba(40, 184, 112, 0.15);
-      font-family: 'DM Sans', sans-serif;
-      scroll-behavior: smooth;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d2d5e;
+      --navy-deep: #071c3a;
+      --navy-mid: #1a4a8a;
+      --green: #28b870;
+      --green-glow: #3de098;
+      --bg: #04101f;
+      --text: #eef3ff;
+      --muted: #8ca8cc;
+      --glass-bg: rgba(13, 29, 56, 0.45);
+      --glass-border: rgba(40, 184, 112, 0.2);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+    }
 
-    html, body {
-      min-height: 100%;
+    body {
+      font-family: 'DM Sans', sans-serif;
       background: var(--bg);
       color: var(--text);
+      overflow-x: hidden;
     }
-    body { line-height: 1.65; overflow-x: hidden; }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--navy-deep); }
-    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
 
     /* Particles Container */
     #particles-hero {
@@ -67,7 +55,6 @@
       pointer-events: auto;
     }
 
-    /* Page Wrapper */
     .page-wrapper {
       width: min(1200px, calc(100% - 2.5rem));
       margin: 0 auto;
@@ -78,16 +65,19 @@
     /* Header */
     header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       backdrop-filter: blur(20px) saturate(1.4);
-      background: rgba(4,16,31,0.82);
-      border-bottom: 1px solid rgba(40,184,112,0.1);
-      transition: background .3s;
+      background: rgba(4, 16, 31, 0.85);
+      border-bottom: 1px solid rgba(40, 184, 112, 0.1);
+      transition: all 0.3s;
     }
     header.scrolled {
-      background: rgba(4,16,31,0.96);
-      border-bottom-color: rgba(40,184,112,0.2);
+      background: rgba(4, 16, 31, 0.96);
+      border-bottom-color: rgba(40, 184, 112, 0.3);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     }
 
     .nav-inner {
@@ -98,30 +88,25 @@
       padding: 1rem 0;
     }
 
-    .brand { display: flex; align-items: center; gap: 0.9rem; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
 
-    /* Animated Logo */
     .brand-logo-img {
       width: 42px;
       height: 42px;
       object-fit: contain;
       filter: brightness(0) invert(1);
-      transition: all 0.3s ease;
       animation: logoGlow 3s ease-in-out infinite;
     }
-    
+
     @keyframes logoGlow {
-      0%, 100% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(40,184,112,0.3));
-        transform: scale(1);
-      }
-      50% {
-        filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(40,184,112,0.8));
-        transform: scale(1.02);
-      }
+      0%, 100% { filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(40,184,112,0.3)); transform: scale(1); }
+      50% { filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(40,184,112,0.8)); transform: scale(1.02); }
     }
 
-    .brand-text { display: grid; gap: 0; }
     .brand__title {
       font-family: 'Montserrat', sans-serif;
       font-size: 1.45rem;
@@ -138,22 +123,30 @@
       font-weight: 600;
     }
 
-    nav ul { display: flex; flex-wrap: wrap; gap: 1.8rem; list-style: none; align-items: center; }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      list-style: none;
+      align-items: center;
+    }
     nav a {
       font-size: 0.9rem;
       font-weight: 500;
       color: var(--muted);
       position: relative;
-      transition: color .25s;
+      transition: color 0.25s;
+      text-decoration: none;
     }
     nav a::after {
       content: '';
       position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 2px;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
       background: var(--green);
-      transition: width .3s ease;
-      border-radius: 2px;
+      transition: width 0.3s;
     }
     nav a:hover { color: var(--text); }
     nav a:hover::after { width: 100%; }
@@ -166,34 +159,34 @@
       place-items: center;
       overflow: hidden;
     }
-
     .hero-video {
       position: absolute;
       inset: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       opacity: 0.55;
       z-index: 0;
     }
-
     .hero::before {
       content: '';
-      position: absolute; inset: 0; z-index: 2;
-      background:
-        linear-gradient(90deg, rgba(4,16,31,0.92) 40%, rgba(4,16,31,0.3) 100%),
-        linear-gradient(180deg, rgba(4,16,31,0.5) 0%, transparent 30%, rgba(4,16,31,0.8) 100%);
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(4,16,31,0.92) 40%, rgba(4,16,31,0.3) 100%),
+                  linear-gradient(180deg, rgba(4,16,31,0.5) 0%, transparent 30%, rgba(4,16,31,0.8) 100%);
     }
-
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -100px; left: -100px;
-      width: 500px; height: 500px;
+      bottom: -100px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
       background: radial-gradient(circle, rgba(40,184,112,0.12) 0%, transparent 70%);
       z-index: 2;
       pointer-events: none;
     }
-
     .hero-content {
       position: relative;
       z-index: 10;
@@ -202,100 +195,50 @@
       display: grid;
       gap: 1.6rem;
     }
-
-    /* Glassmorphism Cards */
-    .content-card, .service-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), border-color 0.3s;
-    }
-    
-    /* Glow Effect on Hover - Radial Gradient following mouse */
-    .content-card::before, .service-card::before {
-      content: '';
-      position: absolute;
-      top: var(--mouse-y, 50%);
-      left: var(--mouse-x, 50%);
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(40,184,112,0.25) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .content-card:hover::before, .service-card:hover::before {
-      opacity: 1;
-    }
-    
-    .content-card:hover, .service-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(40,184,112,0.4);
-      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
-    }
-    
-    .content-card *, .service-card * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .service-icon {
-      width: 3rem; height: 3rem;
-      display: grid; place-items: center;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(13,45,94,0.8), rgba(26,74,138,0.5));
-      border: 1px solid rgba(40,184,112,0.2);
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(40,184,112,0.12);
+      border: 1px solid rgba(40,184,112,0.3);
       color: var(--green);
-      font-size: 1.3rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      width: fit-content;
     }
-
-    /* Grid Layouts */
-    .grid-2, .icon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .icon-grid { gap: 1.25rem; }
-
-    /* Stats Row */
-    .hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-      padding-top: 0.5rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .stat-item { display: grid; gap: 0.15rem; }
-    .stat-num {
+    .hero h1 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
       font-weight: 900;
-      color: var(--text);
-      line-height: 1;
     }
-    .stat-num span { color: var(--green); }
-    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
-
-    /* Buttons */
+    .hero h1 .accent { color: var(--green); }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 600px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: .6rem;
+      gap: 0.6rem;
       padding: 0.9rem 2rem;
       border-radius: 999px;
       font-weight: 700;
-      transition: transform .25s, box-shadow .25s;
+      transition: transform 0.25s, box-shadow 0.25s;
       cursor: pointer;
+      border: none;
+      text-decoration: none;
     }
     .btn-primary {
       background: var(--green);
@@ -316,9 +259,28 @@
       border-color: var(--green);
       color: var(--green);
     }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-item { display: grid; gap: 0.15rem; }
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--text);
+    }
+    .stat-num span { color: var(--green); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
 
-    /* Footer & other sections (مختصر للتوضيح) */
-    .section { padding: 6rem 0; }
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+      position: relative;
+    }
     .section-label {
       display: inline-flex;
       align-items: center;
@@ -333,48 +295,124 @@
     .section-label::before {
       content: '';
       display: block;
-      width: 28px; height: 2px;
+      width: 28px;
+      height: 2px;
       background: var(--green);
+      border-radius: 2px;
     }
     .section h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
       font-weight: 800;
       letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 800px;
+      line-height: 1.7;
+    }
+
+    /* Glassmorphism Cards */
+    .card-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 2rem;
+      transition: transform 0.4s ease, border-color 0.3s;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-glass:hover {
+      transform: translateY(-6px);
+      border-color: rgba(40,184,112,0.5);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
+    }
+    .card-icon {
+      font-size: 2.2rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .card-glass h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    .card-glass p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 2rem;
+    }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .service-icon {
+      width: 3rem;
+      height: 3rem;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(13,45,94,0.8), rgba(26,74,138,0.5));
+      border: 1px solid rgba(40,184,112,0.2);
+      color: var(--green);
+      font-size: 1.3rem;
       margin-bottom: 1rem;
     }
 
-    .about-strip {
-      background: linear-gradient(135deg, rgba(13,29,56,0.5), rgba(8,22,40,0.7));
-      border-radius: 28px;
-      padding: 2.5rem 3rem;
+    .list-bullet {
+      list-style: none;
+      padding-left: 0;
+    }
+    .list-bullet li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+    .list-bullet li i {
+      color: var(--green);
+      margin-top: 0.2rem;
     }
 
     footer {
       padding: 3rem 0;
       border-top: 1px solid rgba(40,184,112,0.1);
       background: linear-gradient(0deg, rgba(4,16,31,1), transparent);
+      text-align: center;
     }
-
     .back-to-top {
-      position: fixed; right: 1.5rem; bottom: 1.5rem;
-      width: 3rem; height: 3rem;
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      width: 3rem;
+      height: 3rem;
       background: rgba(40,184,112,0.15);
       border: 1px solid rgba(40,184,112,0.3);
       color: var(--green);
-      display: grid; place-items: center;
       border-radius: 50%;
+      display: grid;
+      place-items: center;
       cursor: pointer;
       opacity: 0;
-      transition: opacity .25s;
+      transition: opacity 0.25s;
       z-index: 99;
+      backdrop-filter: blur(8px);
     }
     .back-to-top.visible { opacity: 1; }
+    .back-to-top:hover { background: rgba(40,184,112,0.3); }
 
     @media (max-width: 900px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
       .nav-inner { flex-direction: column; }
-      .hero h1 { font-size: 2.6rem; }
+      .hero h1 { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -386,15 +424,15 @@
       <img src="logo.png" alt="NEXUS Logo" class="brand-logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%230d2d5e\'/%3E%3Ctext x=\'50\' y=\'55\' font-size=\'20\' fill=\'%2328b870\' text-anchor=\'middle\'%3EN%3C/text%3E%3C/svg%3E'">
       <div class="brand-text">
         <div class="brand__title">NEXUS</div>
-        <div class="brand__subtitle">Designed to Connect</div>
+        <div class="brand__subtitle">DESIGNED TO CONNECT</div>
       </div>
     </div>
     <nav>
       <ul>
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#why">Why Us</a></li>
+        <li><a href="#why">Advantage</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -402,96 +440,141 @@
 </header>
 
 <main>
+  <!-- Hero Section -->
   <section id="home" class="hero">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="nexus-hero.mp4" type="video/mp4">
     </video>
-    
-    <!-- Particles Container -->
     <div id="particles-hero"></div>
-
     <div class="page-wrapper hero-content">
       <div class="hero-badge"><i class="fas fa-star"></i> Premium Conference Management</div>
-      <h1>Connecting <span class="accent">Visions</span><br>to Experiences</h1>
+      <h1>Connecting <span class="accent">Visions</span><br>to Extraordinary <span class="accent">Experiences</span></h1>
       <p class="hero-desc">Egypt's leading full-service event company — from concept to standing ovation. Every detail crafted for impact.</p>
       <div class="hero-buttons">
         <a class="btn btn-primary" href="#services"><i class="fas fa-arrow-right"></i> Explore Services</a>
         <a class="btn btn-outline" href="#contact">Get in Touch</a>
       </div>
       <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num"><span class="counter" data-target="15">0</span><span>+</span></div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num"><span class="counter" data-target="95">0</span><span>%</span></div>
-          <div class="stat-label">Client Retention</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num"><span class="counter" data-target="500">0</span><span>+</span></div>
-          <div class="stat-label">Events Delivered</div>
-        </div>
+        <div class="stat-item"><div class="stat-num"><span class="counter" data-target="15">0</span><span>+</span></div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-item"><div class="stat-num"><span class="counter" data-target="95">0</span><span>%</span></div><div class="stat-label">Client Retention</div></div>
+        <div class="stat-item"><div class="stat-num"><span class="counter" data-target="500">0</span><span>+</span></div><div class="stat-label">Events Delivered</div></div>
       </div>
     </div>
   </section>
 
+  <!-- About / Who We Are -->
   <section id="about" class="section">
     <div class="page-wrapper">
       <div class="section-label">Who We Are</div>
-      <h2>All Your Event Needs<br>Under One Roof</h2>
-      <div class="about-strip">
-        <p>We are NEXUS — your best full-service event company offering end-to-end solutions & services. We aim to create unforgettable experiences for our clients and everyone involved. A diverse team of creative designers, project managers, and operations specialists who conceptualize, design, and deliver impactful experiences that leave lasting impressions.</p>
+      <h2>All Your Event Needs Under One Roof</h2>
+      <div style="background: linear-gradient(135deg, rgba(13,29,56,0.5), rgba(8,22,40,0.7)); border-radius: 32px; padding: 2rem 2.5rem;">
+        <p style="font-size: 1.05rem; line-height: 1.8;">We are NEXUS — your best full-service event company offering end-to-end event solutions & services. We aim to create an unforgettable experience for our clients and everyone involved.</p>
+        <p style="margin-top: 1rem; line-height: 1.8;">A diverse team of creative designers, project managers, and operation specialists who conceptualize, design, and deliver impactful experiences. We have total control of your event all the way from concept through to completion. Having years of insight and experience, we ensure your campaign/brand receives significant exposure and visibility.</p>
+        <p style="margin-top: 1rem; line-height: 1.8;">Our Passion and dedication for events, combined with the experience of our in-house event specialists, enable us to exceed client expectations. Our clients enable us to develop a solid understanding of their business objectives.</p>
+        <p style="margin-top: 1rem; font-style: italic; color: var(--green);">"From concept to completion — seamlessly."</p>
       </div>
     </div>
   </section>
 
+  <!-- Vision & Mission -->
+  <section class="section">
+    <div class="page-wrapper">
+      <div class="grid-2">
+        <div class="card-glass"><i class="fas fa-eye card-icon"></i><h3>Our Vision</h3><p>To be Egypt's leading event planning company, known for creativity, excellence, and innovation — turning every occasion into a remarkable experience that leaves a lasting impression.</p></div>
+        <div class="card-glass"><i class="fas fa-bullseye card-icon"></i><h3>Our Mission</h3><p>To create unforgettable events in Egypt that exceed our clients' expectations. We handle every detail — from venues and booths to photography and customized giveaways — ensuring a seamless and stress-free experience for every client.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose NEXUS (Focus on Experience & Expertise) -->
+  <section id="why" class="section">
+    <div class="page-wrapper">
+      <div class="section-label">Why Choose NEXUS</div>
+      <h2>Focus on Experience & Expertise</h2>
+      <div class="grid-2" style="margin-bottom: 2rem;">
+        <div class="card-glass"><i class="fas fa-chart-line card-icon"></i><h3>15+ Years Industry Experience</h3><p>With over 15 years of industry experience, we bring deep expertise and certified professionals to every project. We deliver measurable results, helping our clients maximize their budgets through efficient, high-quality solutions.</p></div>
+        <div class="card-glass"><i class="fas fa-headset card-icon"></i><h3>24/7 Dedicated Support</h3><p>As a strategic partner, we align our services with your business goals while providing 24/7 dedicated support. Trusted by industry leaders, our 95% client retention rate reflects our commitment to transparency and excellence.</p></div>
+      </div>
+
+      <div class="section-label" style="margin-top: 2rem;">Benefits of Using a Professional Conference Organizer</div>
+      <div class="card-glass">
+        <div class="grid-2">
+          <div>
+            <ul class="list-bullet">
+              <li><i class="fas fa-clock"></i> <strong>Save Time, Reduce Costs, Eliminate Stress</strong><br>Every aspect of your event is managed by experienced professionals.</li>
+              <li><i class="fas fa-map-marker-alt"></i> <strong>Venue & Supplier Selection</strong><br>Right locations and trusted vendor partners for your specific needs.</li>
+              <li><i class="fas fa-users"></i> <strong>Delegate Coordination & Event Marketing</strong><br>Attendance growth, communication, and engagement.</li>
+              <li><i class="fas fa-chart-line"></i> <strong>Budget Planning & Financial Management</strong><br>Transparent budgets and financial oversight.</li>
+              <li><i class="fas fa-link"></i> <strong>Strong Industry Partnerships</strong><br>Premier suppliers and vendor relationships delivering best value.</li>
+            </ul>
+          </div>
+          <div>
+            <p>Working with a professional conference organizer allows you to focus on your core objectives while we handle every detail. Our expertise helps save time, reduce costs, and eliminate stress, ensuring a smooth and successful event. We manage venue and supplier selection, delegate coordination, event marketing, exhibitor administration, and pre- and post-event operations through proven systems.</p>
+            <p style="margin-top: 1rem;">We also oversee budget planning, financial management, VAT handling, and closing the event within a defined timeframe. Through strong partnerships, we secure the best value for venues, catering, AV, accommodation, and transportation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategic Team & Participant Experience -->
+  <section class="section">
+    <div class="page-wrapper">
+      <div class="grid-2">
+        <div class="card-glass"><i class="fas fa-users card-icon"></i><h3>A Strategic Team Behind the Scenes</h3><p>Our expert team manages all supporting elements of your event, including conference materials, website design, social media content, and media communications, ensuring a cohesive and professional presence.</p></div>
+        <div class="card-glass"><i class="fas fa-smile card-icon"></i><h3>Participant Experience</h3><p>We focus on creating seamless and engaging experiences for participants. From registration and session planning to social activities and logistics, we ensure your delegates enjoy a smooth and memorable event. Prepared for any situation, our team responds quickly and effectively to resolve challenges without disrupting the event.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services (Full list from PDF) -->
   <section id="services" class="section">
     <div class="page-wrapper">
       <div class="section-label">What We Offer</div>
       <h2>Our Full Suite of Services</h2>
-      <div class="icon-grid" id="services-grid">
-        <div class="service-card"><div class="service-icon"><i class="fas fa-calendar-alt"></i></div><h3>Event Management</h3><p>End-to-end planning, coordination, and execution of premium conferences.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-tv"></i></div><h3>Visual Display</h3><p>Custom stage design, large format visuals, and immersive environments.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-paint-brush"></i></div><h3>Branding & Print</h3><p>Logos, signage, brochures, badges and premium collateral.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-building"></i></div><h3>Venue Selection</h3><p>Venue scouting and coordination for your event vision.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-truck"></i></div><h3>Vendor Management</h3><p>End-to-end management of AV, catering, and production teams.</p></div>
-        <div class="service-card"><div class="service-icon"><i class="fas fa-flask"></i></div><h3>Medical Research</h3><p>Specialized support for medical conferences with regulatory documents.</p></div>
+      <p class="section-intro">"Strategic thinking behind every successful event."</p>
+      
+      <div class="grid-3">
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-calendar-alt"></i></div><h3>Event Management</h3><p>From selecting the perfect venue to coordinating logistics, managing vendors, and overseeing on-site execution, we handle every detail with precision and care. Our expert team works closely with you to bring your vision to life.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-tv"></i></div><h3>Visual Display</h3><p>Cutting-edge audiovisual technology and expert team provide comprehensive visual display solutions. From dynamic projections to immersive displays, we deliver high-quality, impactful experiences that elevate your event.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-paint-brush"></i></div><h3>Branding & Print Services</h3><p>Custom signage, promotional materials, and event-specific branding. Our expert team brings your vision to life through high-quality design and print, enhancing your event's identity.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-id-card"></i></div><h3>Event Registration</h3><p>Efficient and seamless registration using state-of-the-art web-based and mobile-based software, QR code scanning for badges, streamlining the check-in process and enhancing guest experience.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-building"></i></div><h3>Event Venue Selection</h3><p>Tailored solutions for corporate events. From modern convention centers to boutique hotel meeting rooms, we conduct thorough site visits to ensure each venue meets your logistical needs.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-truck"></i></div><h3>Vendor Management</h3><p>Streamlined vendor selection and management leveraging our trusted network. We handle contracting, negotiations, and finalizing agreements to ensure every detail is professionally documented.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-plane"></i></div><h3>Guest Logistics Planning</h3><p>Visa facilitation, flight bookings, accommodation coordination, and excursion planning. We work with trusted travel partners to ensure a smooth, hassle-free experience for attendees.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-video"></i></div><h3>Media Production</h3><p>Live streaming, professional photography & videography, technical lighting/sound, and digital content creation. We transform concepts into engaging experiences, boosting brand credibility and post-event impact.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-store"></i></div><h3>Exhibition Management</h3><p>Research, planning, budgeting, booth pricing, stand-building, prospectus design, exhibitor manuals, venue services coordination, freight forwarding, and access control — comprehensive exhibition management.</p></div>
+        <div class="card-glass"><div class="service-icon"><i class="fas fa-flask"></i></div><h3>Clinical Research & Medical Paperwork</h3><p>Specialized support for medical conferences: regulatory writing, clinical data management, real-world evidence generation, healthcare informatics, and digital health solutions. "Where science meets precision, and research becomes impact."</p></div>
       </div>
     </div>
   </section>
 
-  <section id="why" class="section">
-    <div class="page-wrapper">
-      <div class="section-label">Why Choose NEXUS</div>
-      <h2>The NEXUS Advantage</h2>
-      <div class="grid-2">
-        <div class="content-card"><div class="service-icon"><i class="fas fa-award"></i></div><h3>15+ Years Experience</h3><p>Decades of trusted planning and premium event delivery.</p></div>
-        <div class="content-card"><div class="service-icon"><i class="fas fa-headset"></i></div><h3>24/7 Support</h3><p>Round-the-clock assistance for clients and delegates.</p></div>
-        <div class="content-card"><div class="service-icon"><i class="fas fa-handshake"></i></div><h3>95% Retention</h3><p>Strong relationships built through consistency and trust.</p></div>
-        <div class="content-card"><div class="service-icon"><i class="fas fa-globe"></i></div><h3>Global Standards</h3><p>World-class practices adapted for the Egyptian market.</p></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Contact Section -->
   <section id="contact" class="section">
     <div class="page-wrapper">
       <div class="section-label">Get In Touch</div>
       <h2>Let's Build Your Next Event</h2>
       <div class="grid-2">
-        <div class="content-card">
+        <div class="card-glass">
+          <i class="fas fa-phone-alt card-icon"></i>
           <h3>Contact NEXUS</h3>
-          <p><i class="fas fa-phone"></i> +20 1553366905 / +20 1553366240</p>
-          <p><i class="fas fa-envelope"></i> info@nexus2connect.com<br>karim.tharaa@nexus2connect.com<br>amr.elqatary@nexus2connect.com</p>
+          <p><i class="fas fa-phone"></i> +20 1553366905</p>
+          <p><i class="fas fa-phone"></i> +20 1553366240</p>
+          <p><i class="fas fa-envelope"></i> info@nexus2connect.com</p>
+          <p><i class="fas fa-envelope"></i> karim.tharaa@nexus2connect.com</p>
+          <p><i class="fas fa-envelope"></i> amr.elqatary@nexus2connect.com</p>
           <p><i class="fas fa-globe"></i> www.nexus2connect.com</p>
         </div>
-        <div class="content-card">
-          <div class="service-icon"><i class="fas fa-share-alt"></i></div>
+        <div class="card-glass">
+          <i class="fas fa-share-alt card-icon"></i>
           <h3>Stay Connected</h3>
-          <div class="footer-social">
-            <a href="#"><i class="fab fa-linkedin"></i> Nexus to connect</a>
-            <a href="#"><i class="fab fa-facebook-square"></i> Nexus2connect</a>
-            <a href="#"><i class="fab fa-instagram"></i> Nexus2connect</a>
+          <p>Follow us on social media for updates and event highlights.</p>
+          <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <a href="#" style="color: var(--green); font-size: 1.5rem;"><i class="fab fa-linkedin"></i> Nexus to connect</a>
+            <a href="#" style="color: var(--green); font-size: 1.5rem;"><i class="fab fa-facebook-square"></i> Nexus2connect</a>
+            <a href="#" style="color: var(--green); font-size: 1.5rem;"><i class="fab fa-instagram"></i> Nexus2connect</a>
           </div>
+          <p style="margin-top: 1rem;"><strong>WE DESIGN EXPERIENCES, WE MANAGE PERFECTION</strong></p>
         </div>
       </div>
     </div>
@@ -499,15 +582,16 @@
 </main>
 
 <footer>
-  <div class="page-wrapper footer-note">© 2026 NEXUS. All rights reserved. Designed to connect premium events with exceptional execution.</div>
+  <div class="page-wrapper">
+    <p>© 2026 NEXUS. All rights reserved. Designed to connect premium events with exceptional execution.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">NEXUS | Designed to Connect</p>
+  </div>
 </footer>
 
 <div class="back-to-top" id="back2top"><i class="fas fa-chevron-up"></i></div>
 
 <script>
-  // ============================================
-  // 1. PARTICLES.JS CONFIGURATION
-  // ============================================
+  // Particles.js
   particlesJS('particles-hero', {
     particles: {
       number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -515,43 +599,19 @@
       shape: { type: 'circle' },
       opacity: { value: 0.4, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
       size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.5 } },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: '#28b870',
-        opacity: 0.25,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: 'none',
-        random: true,
-        straight: false,
-        out_mode: 'out',
-        bounce: false,
-        attract: { enable: true, rotateX: 600, rotateY: 1200 }
-      }
+      line_linked: { enable: true, distance: 150, color: '#28b870', opacity: 0.25, width: 1 },
+      move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false, attract: { enable: true, rotateX: 600, rotateY: 1200 } }
     },
     interactivity: {
       detect_on: 'canvas',
-      events: {
-        onhover: { enable: true, mode: 'repulse' },
-        onclick: { enable: true, mode: 'push' },
-        resize: true
-      },
-      modes: {
-        repulse: { distance: 100, duration: 0.4 },
-        push: { particles_nb: 4 }
-      }
+      events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+      modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
     },
     retina_detect: true
   });
 
-  // ============================================
-  // 2. MOUSE TRACKING FOR GLOW EFFECT ON CARDS
-  // ============================================
-  document.querySelectorAll('.content-card, .service-card').forEach(card => {
+  // Mouse tracking for glow effect (optional, not strictly needed for all cards but adds polish)
+  document.querySelectorAll('.card-glass, .service-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -561,110 +621,65 @@
     });
   });
 
-  // ============================================
-  // 3. GSAP + SCROLLTRIGGER ANIMATIONS
-  // ============================================
+  // GSAP + ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
 
-  // Staggered Reveal for Service Cards on page load + ScrollTrigger
-  const serviceCards = document.querySelectorAll('.service-card');
-  
-  // Set initial state (hidden)
+  // Staggered reveal for all service cards (using .card-glass inside #services)
+  const serviceCards = document.querySelectorAll('#services .card-glass');
   gsap.set(serviceCards, { opacity: 0, y: 50 });
-  
-  // Staggered animation when they come into view
   ScrollTrigger.batch(serviceCards, {
     onEnter: batch => {
-      gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'back.out(0.6)',
-        overwrite: true
-      });
+      gsap.to(batch, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'back.out(0.6)', overwrite: true });
     },
     once: true
   });
 
-  // Animate section titles and elements on scroll
-  gsap.utils.toArray('.section-label, .section h2, .about-strip, .content-card').forEach(el => {
+  // Animate section headers and cards on scroll
+  gsap.utils.toArray('.section-label, .section h2, .section-intro, .card-glass').forEach(el => {
     gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      },
+      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' },
       opacity: 0,
-      y: 40,
+      y: 35,
       duration: 0.7,
       ease: 'power2.out'
     });
   });
 
-  // Hero content entrance animation
-  gsap.from('.hero-content > *', {
-    duration: 0.8,
-    y: 40,
-    opacity: 0,
-    stagger: 0.15,
-    ease: 'power3.out',
-    delay: 0.2
-  });
+  // Hero entrance
+  gsap.from('.hero-content > *', { duration: 0.8, y: 40, opacity: 0, stagger: 0.15, ease: 'power3.out', delay: 0.2 });
 
-  // ============================================
-  // 4. ANIMATED COUNTERS
-  // ============================================
+  // Animated Counters
   const counters = document.querySelectorAll('.counter');
-  
   const animateCounter = (counter) => {
     const target = parseInt(counter.getAttribute('data-target'));
     let current = 0;
     const increment = target / 50;
-    const updateCounter = () => {
+    const update = () => {
       current += increment;
-      if (current < target) {
-        counter.innerText = Math.floor(current);
-        requestAnimationFrame(updateCounter);
-      } else {
-        counter.innerText = target;
-      }
+      if (current < target) { counter.innerText = Math.floor(current); requestAnimationFrame(update); }
+      else { counter.innerText = target; }
     };
-    updateCounter();
+    update();
   };
-
   const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) { animateCounter(entry.target); counterObserver.unobserve(entry.target); } });
   }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
 
-  counters.forEach(counter => counterObserver.observe(counter));
-
-  // ============================================
-  // 5. BACK TO TOP & HEADER SCROLL EFFECTS
-  // ============================================
+  // Back to top & header scroll
   const btt = document.getElementById('back2top');
   const header = document.getElementById('site-header');
-  
   window.addEventListener('scroll', () => {
     btt.classList.toggle('visible', window.scrollY > 500);
     header.classList.toggle('scrolled', window.scrollY > 60);
   });
-  
   btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // Smooth anchor scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function(e) {
       const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
 </script>
